@@ -237,8 +237,6 @@ class Batcher(object):
     self._batch_queue = Queue.Queue(self.BATCH_QUEUE_MAX)
     self._example_queue = Queue.Queue(self.BATCH_QUEUE_MAX * self._hps.batch_size)
 
-    self._num_example_q_threads = 1 # num threads to fill example queue
-    self._num_batch_q_threads = 1  # num threads to fill batch queue
 
     # Different settings depending on whether we're in single_pass mode or not
     if single_pass:
@@ -251,6 +249,9 @@ class Batcher(object):
       self._num_batch_q_threads = 4  # num threads to fill batch queue
       self._bucketing_cache_size = 100 # how many batches-worth of examples to load into cache before bucketing
 
+    self._num_example_q_threads = 1 # num threads to fill example queue
+    self._num_batch_q_threads = 1  # num threads to fill batch queue
+    
     # Start the threads that load the queues
     self._example_q_threads = []
     for _ in xrange(self._num_example_q_threads):
