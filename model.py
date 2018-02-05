@@ -22,6 +22,7 @@ import numpy as np
 import tensorflow as tf
 from attention_decoder import attention_decoder
 from tensorflow.contrib.tensorboard.plugins import projector
+import pdb 
 
 FLAGS = tf.app.flags.FLAGS
 
@@ -322,6 +323,7 @@ class SummarizationModel(object):
   def run_train_step(self, sess, batch):
     """Runs one training iteration. Returns a dictionary containing train op, summaries, loss, global_step and (optionally) coverage loss."""
     feed_dict = self._make_feed_dict(batch)
+    pdb.set_trace()
     to_return = {
         'train_op': self._train_op,
         'summaries': self._summaries,
