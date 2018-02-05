@@ -237,6 +237,9 @@ class Batcher(object):
     self._batch_queue = Queue.Queue(self.BATCH_QUEUE_MAX)
     self._example_queue = Queue.Queue(self.BATCH_QUEUE_MAX * self._hps.batch_size)
 
+    self._num_example_q_threads = 1 # num threads to fill example queue
+    self._num_batch_q_threads = 1  # num threads to fill batch queue
+
     # Different settings depending on whether we're in single_pass mode or not
     if single_pass:
       self._num_example_q_threads = 1 # just one thread, so we read through the dataset just once
